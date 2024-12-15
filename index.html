@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>AUXClick Event Test</title>
+</head>
+
+<body>
+    <div id="place-app"> </div>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script type="text/babel">
+        function AuxClickTestComponent() {
+            const [auxclick_event, set_auxclick_event] = React.useState();
+            console.log(auxclick_event)
+            const auxclick_event_json = JSON.stringify(auxclick_event, null, 2);
+            console.log(auxclick_event_json)
+            return <div onAuxClick={(event) => set_auxclick_event(event)}>
+                {
+                    auxclick_event &&
+                    <pre>{auxclick_event_json}</pre>
+                }
+                {!auxclick_event && <div>auxclick here!</div>}
+            </div>
+        }
+
+        const App = (props) => {
+
+            return (
+                <div id="auxclick-area">
+                    <h1>AUXClick Event Test</h1>
+                    <AuxClickTestComponent />
+                </div>
+            );
+        };
+
+        ReactDOM.render(
+            App(),
+            document.getElementById('place-app')
+        );
+    </script>
+</body>
+
+</html>
