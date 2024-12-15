@@ -25,12 +25,27 @@
             </div>
         }
 
+        function KeyDownTestComponent() {
+            const [keydown_event, set_keydown_event] = React.useState();
+            console.log(keydown_event)
+            const keydown_event_json = JSON.stringify(keydown_event, null, 2);
+            console.log(keydown_event_json)
+            return <div onKeyDown={(event) => set_keydown_event(event)} contentEditable>
+                {
+                    keydown_event &&
+                    <pre>{keydown_event_json}</pre>
+                }
+                {!keydown_event && <div>key down here!</div>}
+            </div>
+        }
+
         const App = (props) => {
 
             return (
                 <div id="auxclick-area">
                     <h1>AUXClick Event Test</h1>
                     <AuxClickTestComponent />
+                    <KeyDownTestComponent />
                 </div>
             );
         };
